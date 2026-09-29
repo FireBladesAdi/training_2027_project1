@@ -1,23 +1,23 @@
 import 'dart:io';
 
-class Player {
-  String username;
-  int health;
-  int losthealth;
+class Cookie {
+  static int bakeryHours = 10;
+  String bakeryName;
+  double size;
 
-  Player(this.username, this.health, this.losthealth);
+  Cookie(this.size, this.bakeryName);
 
-  int getfinalhealth() {
-    return health - losthealth;
-  }
 }
 
-void main(List<String> arguments){
+void main(List<String> arguments) {
 
-  Player info = Player("RandomDude101", 100, 1);
+  Cookie info = Cookie(3.14159, 'mrCookie' );
+  print(info.bakeryName);
+  print(info.size);
+  print(Cookie.bakeryHours);
 
-  print('Username = ${info.username} &' + ' Health = ${info.health} &' + ' Final Health = ${info.getfinalhealth()}');
-  print("Username = ${info.username}");
-  print("Health = ${info.health}");
-  print("Final Health = ${info.getfinalhealth()}");
+  int testing = 10;
+  String onoroff = testing == 20 ? "ON" : "OFF";
+  
+  print(onoroff);
 }
