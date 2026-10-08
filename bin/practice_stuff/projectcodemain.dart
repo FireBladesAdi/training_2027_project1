@@ -1,118 +1,102 @@
 import 'dart:io';
+import 'projectclasses.dart';
 
 void main(List<String> arguments) {
+
+  List<scoutentries> entriesList = [];
+
   //main part
   int back = 0;
   int newscout = 1;
   int entries = 2;
   int searchbar = 3;
   int exit = 4;
-  int userpick;
+  int userpick = 0;
 
-  //creating teams question variables
-  int teamnum;
-  String teamname;
-  int matchnum;
-  int autoscore;
-  int teleopscore;
-  int finalscore;
-  int fouls;
+  while(userpick != 4) {
+    print(
+        "Welcome to the ULTIMATE SCOUTING SIMULATOR!!!!\nPlease pick a number between: \nPick 1 to enter your results for scouting out a team \nPick 2 to see all the entries you have already entered \nPick 3 for a searchbar to search for a specific team # you entered \nPick 4 to exit this software ");
+    stdout.write("Please Enter The Number Here: ");
+    userpick = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
 
-  //miscellaneous
-  var response;
-  int responsenum;
-  int i;
-
-
-  print(
-      "Welcome to the ULTIMATE SCOUTING SIMULATOR!!!!\nPlease pick a number between: \nPick 1 to enter your results for scouting out a team \nPick 2 to see all the entries you have already entered \nPick 3 for a searchbar to search for a specific team # you entered \nPick 4 to exit this software \n ");
-  stdout.write("Please Enter The Number Here: ");
-  stdin.readLineSync();
-
-  if (userpick == 1) {
-    print("\nWelcome to the scouting section!\n");
-    stdout.write("\nPlease enter the team number: ");
-    var teamnum = stdin.readLineSync();
-    stdout.write("\nPlease enter the team name(NO SPACES): ");
-    var teamname = stdin.readLineSync();
-    stdout.write("\nPlease enter the match number: ");
-    var matchnum = stdin.readLineSync();
-    stdout.write("\nPlease enter the autonomous score: ");
-    var autoscore = stdin.readLineSync();
-    stdout.write("\nPlease enter the teleoperated score: ");
-    var teleopscore = stdin.readLineSync();
-    stdout.write("\nPlease enter the amount of fouls: ");
-    var fouls = stdin.readLineSync();
-
-    var finalscore = autoscore! + teleopscore!;
-
-    stdout.write(
-        "Check if this is all correct: \nThe team number is $teamnum \nThe team name is $teamname \nThe match number is $matchnum \nThe autonomous score is $autoscore \nThe teleop score is $teleopscore \nThe final score is $finalscore \nThe amount of fouls are $fouls. Is this all correct? (Answer with y/n)");
-    var response = stdin.readLineSync();
-
-    if (var response == y) {
-      print("Thank You! Entry Added. ");
-      responsenum = responsenum + 1;
-    }
-    else if (var response == n) {
-      if (var response == y) {
+    if (userpick == 1) {
+      bool addingentry = true;
+      while (addingentry) {
         print("\nWelcome to the scouting section!\n");
         stdout.write("\nPlease enter the team number: ");
-        var teamnum = stdin.readLineSync();
-        stdout.write("\nPlease enter the team name(NO SPACES): ");
-        var teamname = stdin.readLineSync();
+        int teamnum = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
+        stdout.write("\nPlease enter the team name: ");
+        String? teamname = stdin.readLineSync() ?? '';
         stdout.write("\nPlease enter the match number: ");
-        var matchnum = stdin.readLineSync();
+        int matchnum = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
         stdout.write("\nPlease enter the autonomous score: ");
-        var autoscore = stdin.readLineSync();
+        int autoscore = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
         stdout.write("\nPlease enter the teleoperated score: ");
-        var teleopscore = stdin.readLineSync();
+        int teleopscore = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
         stdout.write("\nPlease enter the amount of fouls: ");
-        var fouls = stdin.readLineSync();
+        int fouls = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
 
-        var finalscore = autoscore! + teleopscore!;
+        var finalscore = autoscore + teleopscore;
 
         stdout.write(
-            "Check if this is all correct: \nThe team number is $teamnum \nThe team name is $teamname \nThe match number is $matchnum \nThe autonomous score is $autoscore \nThe teleop score is $teleopscore \nThe final score is $finalscore \nThe amount of fouls are $fouls. Is this all correct? (Answer with y/n)");
-        var response = stdin.readLineSync();
-      }
-      else {
-        print("Please say either y or n");
+            "Check if this is all correct: \nThe team number is $teamnum \nThe team name is $teamname \nThe match number is $matchnum \nThe autonomous score is $autoscore \nThe teleop score is $teleopscore \nThe final score is $finalscore \nThe amount of fouls are $fouls. Is this all correct? (Answer with y/n):");
+       //add a try catch here
+        String? response = stdin.readLineSync();
 
-        if (var response == y) {
-          print("\nWelcome to the scouting section!\n");
-          stdout.write("\nPlease enter the team number: ");
-          var teamnum = stdin.readLineSync();
-          stdout.write("\nPlease enter the team name(NO SPACES): ");
-          var teamname = stdin.readLineSync();
-          stdout.write("\nPlease enter the match number: ");
-          var matchnum = stdin.readLineSync();
-          stdout.write("\nPlease enter the autonomous score: ");
-          var autoscore = stdin.readLineSync();
-          stdout.write("\nPlease enter the teleoperated score: ");
-          var teleopscore = stdin.readLineSync();
-          stdout.write("\nPlease enter the amount of fouls: ");
-          var fouls = stdin.readLineSync();
-
-          var finalscore = autoscore! + teleopscore!;
-
-          stdout.write(
-              "Check if this is all correct: \nThe team number is $teamnum \nThe team name is $teamname \nThe match number is $matchnum \nThe autonomous score is $autoscore \nThe teleop score is $teleopscore \nThe final score is $finalscore \nThe amount of fouls are $fouls. Is this all correct? (Answer with y/n)");
-          var response = stdin.readLineSync();
+        if (response == 'y') {
+          entriesList.add(
+              scoutentries(
+                teamnum: teamnum,
+                teamname: teamname,
+                matchnum: matchnum,
+                autoscore: autoscore,
+                teleopscore: teleopscore,
+                fouls: fouls,
+              )
+          );
+          print("Thank You! Entry Added.\n ");
+          addingentry = false;
+        }
+        else if (response == 'n') {
+          print("Then please re-enter in all of your data. ");
+        }
+        else {
+          print("Please say either y or n");
         }
       }
     }
+
+else if (userpick == 2) {
+      print("Here are all of your entries: \n\n");
+
+      if (entriesList.isEmpty) {
+        print("No entries found!");
+      }
+      else {
+        for (int i = 0; i < entriesList.length; i++) {
+          entriesList[i].printentryinfo(i + 1);
+        }
+      }
+    }
+  else if(userpick == 3) {
+
+      if (entriesList.isEmpty) {
+        print("No entries found!");
+      }
+      else {
+        stdout.write(
+            "Please enter the team number for the team you are searching for: ");
+        int search = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
+        for (int i = 0; i < entriesList.length; i++) {
+          if(entriesList[i].teamnum == search){
+            entriesList[i].printentryinfo(i + 1);
+          }
+        }
+      }
   }
-  else if (userpick == 2) {
-    print("Here are all of your entries: \n\n");
 
-
-    //What Im trying to do: I am trying to make it so that you can print all the entries
-      print("Entry $i: $teamnum");
-      print("Entry $i: $teamname");
-      print("Entry $i: $matchnum");
-      print("Entry $i: $autoscore");
-      print("Entry $i: $teleopscore");
-      print("Entry $i: $fouls");
+  else if (userpick == 4) {
+    print("Exiting the Scouting Simulator. Bye!");
     }
   }
+}
