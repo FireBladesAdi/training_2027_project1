@@ -6,7 +6,7 @@ import 'projectclasses.dart';
 
 void main(List<String> arguments) {
   List<scoutentries> entriesList = [];
-  
+
   int userpick = 0;
 
   while (userpick != 4) {
