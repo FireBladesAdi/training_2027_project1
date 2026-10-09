@@ -6,13 +6,7 @@ import 'projectclasses.dart';
 
 void main(List<String> arguments) {
   List<scoutentries> entriesList = [];
-
-  //main part
-  int back = 0;
-  int newscout = 1;
-  int entries = 2;
-  int searchbar = 3;
-  int exit = 4;
+  
   int userpick = 0;
 
   while (userpick != 4) {
